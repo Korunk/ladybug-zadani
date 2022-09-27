@@ -6,23 +6,29 @@ import './style.css';
 const STEP_SIZE = 25;
 
 const App = () => {
-  const [posX, setPosX] = useState(100);
-  const [posY, setPosY] = useState(100);
-  const [orientation, setOrientation] = useState('right');
+  const [ladyBugState, setLadyBugState] = useState({
+    posY: 100,
+    posX: 100,
+    orientation: ''
+  })
   
   const handleKeyUp = ({ code }) => {
     if (code === 'ArrowUp') {
-      setOrientation('up');
-      setPosX(posX - STEP_SIZE);
+      setLadyBugState({...ladyBugState, orientation: 'up', posY: ladyBugState.posY - STEP_SIZE })
+     // setOrientation('up');
+      //setPosX(posX - STEP_SIZE);
     } else if (code === 'ArrowLeft') {
-      setOrientation('left');
-      setPosY(posY - STEP_SIZE);
+      setLadyBugState({...ladyBugState, orientation: 'left', posX: ladyBugState.posX - STEP_SIZE })
+     // setOrientation('left');
+      // setPosY(posY - STEP_SIZE);
     } else if (code === 'ArrowRight') {
-      setOrientation('right');
-      setPosY(posY + STEP_SIZE);
+      setLadyBugState({...ladyBugState, orientation: 'right', posX: ladyBugState.posX + STEP_SIZE })
+      // setOrientation('right');
+      // setPosY(posY + STEP_SIZE);
     } else if (code === 'ArrowDown') {
-      setOrientation('down');
-      setPosX(posX + STEP_SIZE);
+      setLadyBugState({...ladyBugState, orientation: 'down', posY: ladyBugState.posY + STEP_SIZE })
+      // setOrientation('down');
+      //setPosX(posX + STEP_SIZE);
     }
   };
 
@@ -33,7 +39,7 @@ const App = () => {
       onKeyDown={handleKeyUp}
     >
       <header>Click anywhere to start the game</header>
-      <Ladybug posX={posX} posY={posY} orientation={orientation}/>
+      <Ladybug posX={ladyBugState.posX} posY={ladyBugState.posY} orientation={ladyBugState.orientation}/>
     </div>
   );
 };
